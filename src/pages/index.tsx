@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
+import { RulesViewer } from "@/components/RulesViewer";
 
 export default function Home() {
   return (
@@ -12,13 +13,13 @@ export default function Home() {
       </Head>
 
       <main
-        className="h-full min-h-screen"
+        className="relative h-full w-full min-h-screen"
         style={{
           background:
             "radial-gradient(134.34% 134.34% at 50% 0%, #1F3757 0%, #131537 100%)",
         }}
       >
-        <div className="flex flex-col items-center justify-center h-full pt-12">
+        <div className="flex flex-col items-center justify-center h-full w-full pt-12">
           {/* title and score  */}
           <div className="w-full max-w-[700px] p-5 rounded-xl flex items-center justify-between border-2 border-gray-400">
             <Image
@@ -46,6 +47,10 @@ export default function Home() {
               </h2>
             </div>
           </div>
+        </div>
+        {/* game rules view button  */}
+        <div className="absolute bottom-8 right-8">
+          <RulesViewer />
         </div>
       </main>
     </>
