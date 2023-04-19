@@ -1,5 +1,3 @@
-import { SetStateAction, Dispatch } from "react";
-
 export enum NodeType {
   ROCK = "rock",
   PAPER = "paper",

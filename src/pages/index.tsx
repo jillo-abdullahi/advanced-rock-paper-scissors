@@ -5,10 +5,17 @@ import { RulesViewer } from "@/components/RulesViewer";
 import { Node } from "@/components/Node";
 import { NodeType } from "@/components/Node";
 
+enum Winner {
+  USER = "user",
+  COMPUTER = "computer",
+  DRAW = "draw",
+}
+
 export default function Home() {
   const [score, setScore] = useState(0);
   const [userChoice, setUserChoice] = useState<NodeType | null>(null);
   const [computerChoice, setComputerChoice] = useState<NodeType | null>(null);
+  const [winner, setWinner] = useState<Winner | null>(null);
 
   const computerChoices = [
     NodeType.ROCK,
@@ -17,6 +24,24 @@ export default function Home() {
     NodeType.LIZARD,
     NodeType.SPOCK,
   ];
+
+  const rules = {
+    [NodeType.ROCK]: {
+      beats: [NodeType.SCISSORS, NodeType.LIZARD],
+    },
+    [NodeType.PAPER]: {
+      beats: [NodeType.ROCK, NodeType.SPOCK],
+    },
+    [NodeType.SCISSORS]: {
+      beats: [NodeType.PAPER, NodeType.LIZARD],
+    },
+    [NodeType.LIZARD]: {
+      beats: [NodeType.PAPER, NodeType.SPOCK],
+    },
+    [NodeType.SPOCK]: {
+      beats: [NodeType.ROCK, NodeType.SCISSORS],
+    },
+  };
 
   const handleUserChoice = (choice: NodeType) => {
     setComputerChoice(null);
@@ -33,6 +58,22 @@ export default function Home() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userChoice]);
+
+  // set winner based on choices
+  useEffect(() => {
+    if (userChoice && computerChoice) {
+      if (userChoice === computerChoice) {
+        setWinner(Winner.DRAW);
+      } else if (rules[userChoice].beats.includes(computerChoice)) {
+        setWinner(Winner.USER);
+        setScore((prev) => prev + 1);
+      } else {
+        setWinner(Winner.COMPUTER);
+        setScore((prev) => (prev > 0 ? prev - 1 : 0));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [computerChoice, userChoice]);
 
   return (
     <>
@@ -74,7 +115,7 @@ export default function Home() {
                   color: "#565468",
                 }}
               >
-                13
+                {score}
               </h2>
             </div>
           </div>
