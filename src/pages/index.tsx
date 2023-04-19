@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Head from "next/head";
 import { RulesViewer } from "@/components/RulesViewer";
+import { Node } from "@/components/Node";
+import { NodeType } from "@/components/Node";
 
 export default function Home() {
   return (
@@ -48,6 +50,19 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* // game board */}
+        <div className="flex items-center justify-center w-full">
+          <Node nodeType={NodeType.LIZARD}>
+            <Image
+              src="/images/icon-lizard.svg"
+              width={62}
+              height={60}
+              alt="rules"
+            />
+          </Node>
+        </div>
+
         {/* game rules view button  */}
         <div className="absolute bottom-8 right-8">
           <RulesViewer />
