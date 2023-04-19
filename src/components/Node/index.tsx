@@ -36,7 +36,7 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
   }
 
   return (
-    <div className="relative">
+    <button className="relative hover:transform hover:scale-105 transition-transform duration-300 ease-in-out" >
       <div
         className={`flex relative z-30 top-0 left-0 items-center overflow-hidden rounded-full justify-center border-16.84 ${mainCircleBorderColor} bg-background`}
         style={{
@@ -62,6 +62,6 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
           boxShadow: " 0px 3px 3px rgba(0, 0, 0, 0.196706)",
         }}
       ></div>
-    </div>
+    </button>
   );
 };
