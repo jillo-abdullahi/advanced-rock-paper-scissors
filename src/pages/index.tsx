@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { RulesViewer } from "@/components/RulesViewer";
@@ -5,6 +6,34 @@ import { Node } from "@/components/Node";
 import { NodeType } from "@/components/Node";
 
 export default function Home() {
+  const [score, setScore] = useState(0);
+  const [userChoice, setUserChoice] = useState<NodeType | null>(null);
+  const [computerChoice, setComputerChoice] = useState<NodeType | null>(null);
+
+  const computerChoices = [
+    NodeType.ROCK,
+    NodeType.PAPER,
+    NodeType.SCISSORS,
+    NodeType.LIZARD,
+    NodeType.SPOCK,
+  ];
+
+  const handleUserChoice = (choice: NodeType) => {
+    setComputerChoice(null);
+    setUserChoice(choice);
+  };
+
+  // setting choice after a delay for dramatic effect
+  useEffect(() => {
+    if (userChoice) {
+      setTimeout(() => {
+        const computerChoice = Math.floor(Math.random() * 5);
+        setComputerChoice(computerChoices[computerChoice]);
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userChoice]);
+
   return (
     <>
       <Head>
@@ -64,7 +93,10 @@ export default function Home() {
 
             {/* top center */}
             <div className="absolute z-40 -top-12 left-0 right-0 mx-auto w-fit">
-              <Node nodeType={NodeType.SCISSORS}>
+              <Node
+                nodeType={NodeType.SCISSORS}
+                handleUserChoice={handleUserChoice}
+              >
                 <Image
                   src="/images/icon-scissors.svg"
                   width={62}
@@ -76,7 +108,10 @@ export default function Home() {
 
             {/* top left  */}
             <div className="absolute top-14 -left-12 w-fit">
-              <Node nodeType={NodeType.SPOCK}>
+              <Node
+                nodeType={NodeType.SPOCK}
+                handleUserChoice={handleUserChoice}
+              >
                 <Image
                   src="/images/icon-spock.svg"
                   width={62}
@@ -88,7 +123,10 @@ export default function Home() {
 
             {/* top right  */}
             <div className="absolute top-14 -right-12 w-fit">
-              <Node nodeType={NodeType.PAPER}>
+              <Node
+                nodeType={NodeType.PAPER}
+                handleUserChoice={handleUserChoice}
+              >
                 <Image
                   src="/images/icon-paper.svg"
                   width={62}
@@ -100,7 +138,10 @@ export default function Home() {
 
             {/* bottom left  */}
             <div className="absolute -bottom-10 left-0 w-fit">
-              <Node nodeType={NodeType.LIZARD}>
+              <Node
+                nodeType={NodeType.LIZARD}
+                handleUserChoice={handleUserChoice}
+              >
                 <Image
                   src="/images/icon-lizard.svg"
                   width={62}
@@ -112,7 +153,10 @@ export default function Home() {
 
             {/* bottom right  */}
             <div className="absolute -bottom-10 right-0 w-fit">
-              <Node nodeType={NodeType.ROCK}>
+              <Node
+                nodeType={NodeType.ROCK}
+                handleUserChoice={handleUserChoice}
+              >
                 <Image
                   src="/images/icon-rock.svg"
                   width={62}

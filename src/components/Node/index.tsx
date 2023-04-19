@@ -1,3 +1,5 @@
+import { SetStateAction, Dispatch } from "react";
+
 export enum NodeType {
   ROCK = "rock",
   PAPER = "paper",
@@ -6,9 +8,16 @@ export enum NodeType {
   SPOCK = "spock",
 }
 
-export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
+interface NodeProps {
+  children: JSX.Element;
+  nodeType: NodeType;
+  handleUserChoice: (userChoice: NodeType) => void;
+}
+
+export const Node: React.FC<NodeProps> = ({
   children,
   nodeType,
+  handleUserChoice,
 }) => {
   let mainCircleBorderColor, outerCircleBorderColor;
 
@@ -36,7 +45,10 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
   }
 
   return (
-    <button className="relative hover:transform hover:scale-105 transition-transform duration-300 ease-in-out" >
+    <button
+      className="relative hover:transform hover:scale-105 transition-transform duration-300 ease-in-out"
+      onClick={() => handleUserChoice(nodeType)}
+    >
       <div
         className={`flex relative z-30 top-0 left-0 items-center overflow-hidden rounded-full justify-center border-16.84 ${mainCircleBorderColor} bg-background`}
         style={{
