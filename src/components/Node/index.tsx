@@ -14,36 +14,34 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
 
   switch (nodeType) {
     case NodeType.ROCK:
-      mainCircleBorderColor = "#DB2E4D";
-      outerCircleBorderColor = "#9D1634";
+      mainCircleBorderColor = "border-rock";
+      outerCircleBorderColor = "border-rock-secondary";
       break;
     case NodeType.PAPER:
-      mainCircleBorderColor = "#4664F4";
-      outerCircleBorderColor = "#2A45C2";
+      mainCircleBorderColor = "border-paper";
+      outerCircleBorderColor = "border-paper-secondary";
       break;
     case NodeType.SCISSORS:
-      mainCircleBorderColor = "#EB9F0E";
-      outerCircleBorderColor = "#C76C1B";
+      mainCircleBorderColor = "border-scissors";
+      outerCircleBorderColor = "border-scissors-secondary";
       break;
     case NodeType.LIZARD:
-      mainCircleBorderColor = "#834EE3";
-      outerCircleBorderColor = "#5F37A8";
+      mainCircleBorderColor = "border-lizard";
+      outerCircleBorderColor = "border-lizard-secondary";
       break;
     case NodeType.SPOCK:
-      mainCircleBorderColor = "#3FB7CD";
-      outerCircleBorderColor = "#2D8DAB";
+      mainCircleBorderColor = "border-spock";
+      outerCircleBorderColor = "border-spock-secondary";
       break;
   }
 
   return (
     <div className="relative">
       <div
-        className={`flex relative z-30 top-0 left-0 items-center overflow-hidden rounded-full justify-center border-16.84`}
+        className={`flex relative z-30 top-0 left-0 items-center overflow-hidden rounded-full justify-center border-16.84 ${mainCircleBorderColor} bg-background`}
         style={{
           width: "145px",
           height: "145px",
-          borderColor: `${mainCircleBorderColor}`,
-          backgroundColor: "#BABFD4",
         }}
       >
         <div
@@ -56,12 +54,11 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
         <div className="z-20">{children}</div>
       </div>
       <div
-        className={`absolute z-20 top-1 left-0 border-12 border-blue-500`}
+        className={`absolute z-20 top-1 left-0 border-12 border-blue-500 ${outerCircleBorderColor}`}
         style={{
           width: "145px",
           height: "148px",
           borderRadius: "50%",
-          borderColor: `${outerCircleBorderColor}`,
           boxShadow: " 0px 3px 3px rgba(0, 0, 0, 0.196706)",
         }}
       ></div>
