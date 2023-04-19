@@ -10,28 +10,28 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
   children,
   nodeType,
 }) => {
-  let mainCircleColor, outerCircleColor;
+  let mainCircleBorderColor, outerCircleBorderColor;
 
   switch (nodeType) {
     case NodeType.ROCK:
-      mainCircleColor = "border-red-500";
-      outerCircleColor = "border-red-500";
+      mainCircleBorderColor = "#DB2E4D";
+      outerCircleBorderColor = "#9D1634";
       break;
     case NodeType.PAPER:
-      mainCircleColor = "border-yellow-500";
-      outerCircleColor = "border-yellow-500";
+      mainCircleBorderColor = "#4664F4";
+      outerCircleBorderColor = "#2A45C2";
       break;
     case NodeType.SCISSORS:
-      mainCircleColor = "border-purple-500";
-      outerCircleColor = "border-purple-500";
+      mainCircleBorderColor = "#EB9F0E";
+      outerCircleBorderColor = "#C76C1B";
       break;
     case NodeType.LIZARD:
-      mainCircleColor = "border-red-500";
-      outerCircleColor = "border-green-500";
+      mainCircleBorderColor = "#834EE3";
+      outerCircleBorderColor = "#5F37A8";
       break;
     case NodeType.SPOCK:
-      mainCircleColor = "border-blue-500";
-      outerCircleColor = "border-blue-500";
+      mainCircleBorderColor = "#3FB7CD";
+      outerCircleBorderColor = "#2D8DAB";
       break;
   }
 
@@ -42,7 +42,7 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
         style={{
           width: "145px",
           height: "145px",
-          borderColor: "#834EE3",
+          borderColor: `${mainCircleBorderColor}`,
           backgroundColor: "#BABFD4",
         }}
       >
@@ -61,7 +61,7 @@ export const Node: React.FC<{ children: JSX.Element; nodeType: NodeType }> = ({
           width: "145px",
           height: "148px",
           borderRadius: "50%",
-          borderColor: "#5F37A8",
+          borderColor: `${outerCircleBorderColor}`,
           boxShadow: " 0px 3px 3px rgba(0, 0, 0, 0.196706)",
         }}
       ></div>

@@ -53,7 +53,7 @@ export default function Home() {
 
         {/* // game board */}
         <div className="flex items-center justify-center w-full">
-          <Node nodeType={NodeType.LIZARD}>
+          <Node nodeType={NodeType.SPOCK}>
             <Image
               src="/images/icon-lizard.svg"
               width={62}
