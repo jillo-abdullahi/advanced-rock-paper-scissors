@@ -17,6 +17,7 @@ export default function Home() {
   const [computerChoice, setComputerChoice] = useState<NodeType | null>(null);
   const [winner, setWinner] = useState<Winner | null>(null);
   const [showWinnerStatus, setShowWinnerStatus] = useState(false);
+  const [showResultsCard, setShowResultsCard] = useState(false);
 
   const computerChoices = [
     NodeType.ROCK,
@@ -51,7 +52,9 @@ export default function Home() {
 
   const handleUserChoice = (choice: NodeType) => {
     setComputerChoice(null);
-    setUserChoice(choice);
+    // show results card immediately
+    setShowResultsCard(true);
+    setTimeout(() => setUserChoice(choice), 1000);
   };
 
   const resetGame = () => {
@@ -59,6 +62,7 @@ export default function Home() {
     setComputerChoice(null);
     setWinner(null);
     setShowWinnerStatus(false);
+    setShowResultsCard(false);
   };
 
   // setting choice after a delay for dramatic effect
@@ -235,28 +239,33 @@ export default function Home() {
           )}
 
           {/* game result  */}
-          {userChoice && (
+          {showResultsCard && (
             <div className="flex items-center justify-between w-full mt-24 max-w-[700px]">
-              <div className="text-center">
+              {/* user choice  */}
+              <div
+                className={`${transitionStyles} ${
+                  userChoice ? "scale-100" : "scale-0"
+                }`}
+              >
                 <div className="uppercase mb-16 font-bold text-2xl">
                   you picked
                 </div>
-                <div
-                  className={`${transitionStyles} ${
-                    userChoice ? "scale-100" : "scale-0"
-                  }`}
-                >
-                  <Node nodeType={userChoice}>
-                    <Image
-                      src={rules[userChoice].image}
-                      width={62}
-                      height={60}
-                      alt="rules"
-                    />
-                  </Node>
+
+                <div className="transform scale-150">
+                  {userChoice && (
+                    <Node nodeType={userChoice}>
+                      <Image
+                        src={rules[userChoice].image}
+                        width={62}
+                        height={60}
+                        alt="rules"
+                      />
+                    </Node>
+                  )}
                 </div>
               </div>
 
+              {/* win/lose/draw CTA  */}
               <div
                 className={`flex flex-col space-y-6 justify-center items-center transform transition-transform duration-200 ${
                   showWinnerStatus ? "scale-100" : "scale-0"
@@ -280,16 +289,19 @@ export default function Home() {
                   play again
                 </button>
               </div>
-              <div>
+
+              {/* computer choice  */}
+
+              <div
+                className={`${transitionStyles} ${
+                  computerChoice ? "scale-100" : "scale-0"
+                } text-center`}
+              >
                 <div className="uppercase mb-16 font-bold text-2xl">
                   the house picked
                 </div>
                 {computerChoice ? (
-                  <div
-                    className={`${transitionStyles} ${
-                      computerChoice ? "scale-100" : "scale-0"
-                    }`}
-                  >
+                  <div className="transform scale-150">
                     <Node nodeType={computerChoice}>
                       <Image
                         src={rules[computerChoice].image}
