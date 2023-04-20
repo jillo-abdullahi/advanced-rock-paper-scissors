@@ -150,7 +150,7 @@ export default function Home() {
           </div>
 
           {/* // game board */}
-          {!userChoice && (
+          {!showResultsCard && (
             <div className="flex items-center justify-center w-full mt-24">
               <div className="relative p-4 border-1 border-gray-200">
                 <Image
