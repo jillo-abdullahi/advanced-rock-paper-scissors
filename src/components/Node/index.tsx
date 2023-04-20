@@ -9,7 +9,7 @@ export enum NodeType {
 interface NodeProps {
   children: JSX.Element;
   nodeType: NodeType;
-  handleUserChoice: (userChoice: NodeType) => void;
+  handleUserChoice?: (userChoice: NodeType) => void;
 }
 
 export const Node: React.FC<NodeProps> = ({
@@ -45,7 +45,7 @@ export const Node: React.FC<NodeProps> = ({
   return (
     <button
       className="relative hover:transform hover:scale-105 transition-transform duration-300 ease-in-out"
-      onClick={() => handleUserChoice(nodeType)}
+      onClick={() => handleUserChoice && handleUserChoice(nodeType)}
     >
       <div
         className={`flex relative z-30 top-0 left-0 items-center overflow-hidden rounded-full justify-center border-16.84 ${mainCircleBorderColor} bg-background`}
